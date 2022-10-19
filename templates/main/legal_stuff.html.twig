@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script defer src="{{ asset('js/legal.js') }}"></script>
+{% endblock %}
+
+
 {% block title %}
     {{ parent() }}
     - Mentions légales
