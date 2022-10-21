@@ -9,4 +9,14 @@
 
     <h1>Liste des souhaits</h1>
 
+    <section class="grid">
+        {% for wish in wishes %}
+            <article class="card">
+                <a href="{{ path('wish_detail', {'id': wish.id}) }}">
+                    {{ wish.title }}
+                </a>
+            </article>
+        {% endfor %}
+    </section>
+
 {% endblock %}
