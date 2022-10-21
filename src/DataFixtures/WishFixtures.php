@@ -5,6 +5,8 @@ namespace App\DataFixtures;
 use App\Entity\Wish;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
+use Faker\ORM\Doctrine\Populator;
 
 class WishFixtures extends Fixture
 {
@@ -31,6 +33,16 @@ class WishFixtures extends Fixture
         $wish3->setIsPublished(true);
         $wish3->setDateCreated(new \DateTime('2020-08-09 17:55:05'));
         $manager->persist($wish3);
+
+        // Utilisation de Faker
+        $generator = Factory::create('fr_FR');
+        $populator = new Populator($generator, $manager);
+        $populator->addEntity(Wish::class, 100, [
+            'author' => function() use ($generator) {
+                return $generator->userName;
+            }
+        ]);
+        $populator->execute();
 
         $manager->flush();
     }
