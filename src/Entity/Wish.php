@@ -5,8 +5,10 @@ namespace App\Entity;
 use App\Repository\WishRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Date;
 
 #[ORM\Entity(repositoryClass: WishRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Wish
 {
     #[ORM\Id]
@@ -92,5 +94,13 @@ class Wish
         $this->dateCreated = $dateCreated;
 
         return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function setDateCreatedValue(): void
+    {
+        if ($this->getDateCreated() === null) {
+            $this->setDateCreated(new \DateTime());
+        }
     }
 }
