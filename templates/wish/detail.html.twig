@@ -7,7 +7,17 @@
 
 {% block body %}
 
-    <h1>Détails d'un souhait</h1>
+    <h1>{{ wish.title }}</h1>
+
+    <div>
+        <time datetime="{{ wish.dateCreated|date('Y-m-d') }}">
+            {{ wish.dateCreated|date('d/m/Y') }}
+        </time>
+        par
+        <em>{{ wish.author }}</em>
+    </div>
+
+    <p>{{ wish.description }}</p>
 
 {% endblock %}
 
