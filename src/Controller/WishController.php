@@ -47,6 +47,8 @@ class WishController extends AbstractController
             $em->persist($wish);
             $em->flush();
 
+            $this->addFlash('success', 'Le souhait a bien été créé');
+
             return $this->redirectToRoute('wish_detail', ['id' => $wish->getId()]);
         }
 
@@ -65,6 +67,8 @@ class WishController extends AbstractController
         if ($formWish->isSubmitted() && $formWish->isValid()) {
             //$em->persist($wish);
             $em->flush();
+
+            $this->addFlash('success', 'Le souhait a bien été modifié');
 
             return $this->redirectToRoute('wish_detail', ['id' => $wish->getId()]);
         }
