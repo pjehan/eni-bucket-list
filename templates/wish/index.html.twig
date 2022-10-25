@@ -15,6 +15,9 @@
                 <a href="{{ path('wish_detail', {'id': wish.id}) }}">
                     {{ wish.title }}
                 </a>
+                <a href="{{ path('wish_update', {'id': wish.id}) }}">
+                    Modifier
+                </a>
             </article>
         {% endfor %}
     </section>

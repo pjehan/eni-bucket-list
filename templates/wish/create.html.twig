@@ -9,13 +9,7 @@
 
     <h1>Création d'un nouveau souhait</h1>
 
-    {{ form_start(formWish) }}
-
-        {{ form_widget(formWish) }}
-
-        <button>Ajouter</button>
-
-    {{ form_end(formWish) }}
+    {% include 'wish/_form.html.twig' with { 'btnText': 'Ajouter' } %}
 
 {% endblock %}
 
