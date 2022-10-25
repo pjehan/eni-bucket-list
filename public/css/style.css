@@ -69,3 +69,14 @@ nav ul {
     list-style: none;
     padding-left: 0;
 }
+
+.help-text {
+    font-size: 0.8rem;
+    color: darkgray;
+}
+
+label.required::after {
+    content: '*';
+    font-size: 2rem;
+    color: #B0413E;
+}
