@@ -74,4 +74,17 @@ class WishController extends AbstractController
             'formWish' => $formWish->createView()
         ]);
     }
+
+    #[Route('/delete/{id}', name: 'wish_delete', methods: ['POST'])]
+    public function delete(Request $request, EntityManagerInterface $em, Wish $wish): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $wish->getId(), $request->request->get('_token'))) {
+            $em->remove($wish);
+            $em->flush();
+        } else {
+            $this->addFlash('error', 'Le token CSRF est invalide !');
+        }
+
+        return $this->redirectToRoute('wish_list');
+    }
 }
