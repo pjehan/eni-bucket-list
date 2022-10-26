@@ -15,6 +15,9 @@
                 <a href="{{ path('wish_detail', {'id': wish.id}) }}">
                     {{ wish.title }}
                 </a>
+                <div>
+                    <em>{{ wish.category.name }}</em>
+                </div>
                 <a href="{{ path('wish_update', {'id': wish.id}) }}">
                     Modifier
                 </a>

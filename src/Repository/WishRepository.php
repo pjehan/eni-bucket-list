@@ -39,6 +39,18 @@ class WishRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllWithCategories()
+    {
+        $qb = $this->createQueryBuilder('w');
+
+        $qb->addSelect('c')
+            ->innerJoin('w.category', 'c')
+            ->where('w.isPublished = 1') // ->where($qb->expr()->eq('w.isPublished', true))
+            ->orderBy('w.dateCreated', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Wish[] Returns an array of Wish objects
 //     */
