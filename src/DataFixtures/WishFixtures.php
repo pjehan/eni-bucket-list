@@ -42,7 +42,11 @@ class WishFixtures extends Fixture implements DependentFixtureInterface
         // Utilisation de Faker
         $generator = Factory::create('fr_FR');
         $populator = new Populator($generator, $manager);
-        $populator->addEntity(Category::class, 1); // Pour avoir 1 catégorie à associer aux 100 Wish créés ensuite
+        $populator->addEntity(Category::class, 1, [
+            'name' => function() use ($generator) {
+                return $generator->text(20);
+            }
+        ]); // Pour avoir 1 catégorie à associer aux 100 Wish créés ensuite
         $populator->addEntity(Wish::class, 100, [
             'author' => function() use ($generator) {
                 return $generator->userName;
