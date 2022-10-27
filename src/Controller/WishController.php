@@ -7,6 +7,7 @@ use App\Form\WishType;
 use App\Repository\WishRepository;
 use App\Util\Censurator;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,9 +38,11 @@ class WishController extends AbstractController
     }
 
     #[Route('/create', name: 'wish_create', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function create(Request $request, EntityManagerInterface $em, Censurator $censurator): Response
     {
         $wish = new Wish();
+        $wish->setAuthor($this->getUser()->getPseudo());
         $formWish = $this->createForm(WishType::class, $wish);
 
         $formWish->handleRequest($request);
