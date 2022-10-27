@@ -36,6 +36,18 @@
                         <li>
                             <a href="{{ path('about_us') }}">A propos</a>
                         </li>
+                        {% if app.user %}
+                            <li>
+                                <a href="{{ path('app_logout') }}">Déconnexion</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="#">Créer un compte</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_login') }}">Connexion</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </nav>
             </header>
